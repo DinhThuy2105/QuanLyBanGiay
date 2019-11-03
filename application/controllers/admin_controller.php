@@ -16,6 +16,11 @@ class admin_controller extends CI_Controller {
         $this->checkRole();
       }
   public function index(){
+
+    $this->load->view('admin/index');
+  }
+
+  public function manager_bill(){
     $result['data'] = $this->model_hoadon->getBillToBillManager();
     $result['error'] = '';
     if(count($result['data'])==0){
@@ -79,7 +84,38 @@ class admin_controller extends CI_Controller {
   public function quanlysan(){
     $data['data'] = $this->model_san->getAllsan();
     $data['error'] = '';
-    $this->load->view('pitchmanager',$data);
+    $this->load->view('admin/pitchmanager',$data);
   }
+
+  public function insertPitch(){
+
+    $tensan = $this->input->post('tensan');
+    $loaisan = $this->input->post('loaisan');
+    $dongia = $this->input->post('dongia');
+    $day = date('Y-m-d H:i:s');
+
+    $this->db->trans_begin();
+    $db = array('tensan' => $tensan,
+							'loaisan' => $loaisan,
+							'dongia'=> $dongia,
+							'updatedDate' => $day);
+    //Update trạng thái đơn
+    $this->model_san->insertPitch($db);
+
+    if ($this->db->trans_status() === FALSE)
+				{	
+					error_log($this->db->last_query());
+					$this->db->trans_rollback();
+					$db['error'] = "Lỗi thực hiện cập nhật database!";
+					echo json_encode($data);
+				}
+				else
+				{
+          $this->db->trans_commit();
+          $db['error'] = "";
+					echo json_encode($db);
+				}
+  }
+
 }
 ?>

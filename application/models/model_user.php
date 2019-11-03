@@ -3,7 +3,15 @@ class model_user extends CI_Model {
 	
       function __construct() { 
           $this->load->database(); 
-    	}
+      }
+      
+
+      public function inserttaikhoan($db){
+        $this->db->insert('tbl_taikhoan',$db);
+        //print_r($this->db->last_query());
+        return $this->db->affected_rows();
+      } 
+
       public function getByUsPw($user,$pw){
         $this->db->select('tbl_customer.id,username,tenkhachhang,idrole,gioitinh,diachi,ngaysinh,sodt,diemthuong,email');
         $this->db->from('tbl_taikhoan');

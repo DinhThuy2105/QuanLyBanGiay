@@ -65,6 +65,10 @@ $route['admin/quan-ly-san'] = 'admin_controller/quanlysan';
 
 // homepage
 $route['acountmanager'] = 'homepage_controller/acountmanager';
-$route['acountmanager'] = 'homepage_controller/about';
-$route['acountmanager'] = 'homepage_controller/contact';
-$route['acountmanager'] = 'homepage_controller/works';
+$route['about'] = 'homepage_controller/about';
+$route['contact'] = 'homepage_controller/contact';
+$route['works'] = 'homepage_controller/works';
+$route['view_bill'] = 'homepage_controller/view_bill';
+
+//admin
+$route['manager_bill'] = 'admin_controller/manager_bill';

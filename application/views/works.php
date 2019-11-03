@@ -1,58 +1,25 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <!DOCTYPE html>
 <html>
-
 <head>
-  <!-- BASICS -->
-  <meta charset="utf-8">
-  <title>Vlava - One page responsive bootstrap site template</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="js/rs-plugin/css/settings.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="css/isotope.css" media="screen">
-  <link rel="stylesheet" href="css/flexslider.css" type="text/css">
-  <link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen">
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700">
-
-  <link rel="stylesheet" href="css/style.css">
-  <!-- skin -->
-  <link rel="stylesheet" href="skin/default.css">
-  <!-- =======================================================
-    Theme Name: Vlava
-    Theme URL: https://bootstrapmade.com/vlava-free-bootstrap-one-page-template/
-    Author: BootstrapMade.com
-    Author URL: https://bootstrapmade.com
-  ======================================================= -->
-
+<?php
+include("common/header.php")
+?>
+<style>
+  .navbar-fixed-top{
+    background-color:rgba(5, 41, 61, 0.984) !important;
+  }
+</style>
 </head>
-
-<body style="display: contents;">
-  <section id="header" class="appear"></section>
-  <div class="navbar navbar-fixed-top" role="navigation" data-0="line-height:100px; height:100px; background-color:rgba(5, 41, 61, 0.984);" data-300="line-height:60px; height:60px; background-color:rgba(5, 42, 62, 1);">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-      	  <span class="fa fa-bars color-white"></span>
-        </button>
-        <div class="navbar-logo">
-          <a href="index.html"><img data-0="width:155px;" data-300=" width:120px;" src="img/logo.png" alt=""></a>
-        </div>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav" data-0="margin-top:20px;" data-300="margin-top:5px;">
-          <li><a href="index.html">Trang chủ</a></li>
-          <li><a href="about.html">Giới thiệu</a></li>
-          <li><a href="works.html">Đặt sân</a></li>
-          <li class="active"><a href="contact.html">Liên hệ</a></li>
-          <li><a href="#">Đăng nhập</a></li>
-        </ul>
-      </div>
-      <!--/.navbar-collapse -->
-    </div>
-  </div>
+<body style="touch-action: none;">
+<?php
+include("common/navbar.php")
+?>
 
   <!-- section works -->
-  <section id="section-works" class="section appear clearfix" style="margin-top: 50px;">
+  <section id="section-works" class="section appear clearfix" style="margin-top:50px">
     <div class="container">
 
       <div class="row mar-bot40">
@@ -64,204 +31,470 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row" style="margin:auto">
         <nav id="filter" class="col-md-12 text-center">
+          
           <ul>
-            <li><a href="#" class="current btn btn-small" data-filter="*">All</a></li>
-            <li><a href="#" class="btn btn-small" data-filter=".webdesign">Web Design</a></li>
-            <li><a href="#" class="btn btn-small" data-filter=".photography">Photography</a></li>
-            <li><a href="#" class="btn btn-small" data-filter=".print">Print</a></li>
+          <li><a href="#" class="current btn btn-small" data-filter="*">All</a></li>
+          <?php foreach ($type as $key => $value) {?>
+
+                <li>
+                <a href="#" class="current btn btn-small" data-filter=".<?php echo str_ireplace(" ","-",$value->loaisan);?>"><?php echo $value->loaisan;?></a>
+              </li>                    
+            <?php }?>
           </ul>
         </nav>
         <div class="col-md-12">
-          <div class="row">
+          <div class="row" style="margin-left: 30px;">
+          
             <div class="portfolio-items isotopeWrapper clearfix" id="3">
-
-              <article class="col-md-3 isotopeItem webdesign">
+            <?php foreach ($data as $key => $value) {
+            # code...
+            ?>
+              <article class="col-md-3 isotopeItem <?php echo str_ireplace(" ","-",$value->loaisan);?>" >
                 <div class="portfolio-item">
-                  <img src="img/portfolio/img1.png" alt="">
-                  <div class="portfolio-desc align-center">
+                  <img src="/datsannhanh/image/portfolio/img1.png" alt="" >
+                  <div class="portfolio-desc align-center" style="touch-action: none;" onclick="choosesan(event,<?php echo  $value->idsan ;?>)">
                     <div class="folio-info">
-                      <h5><a href="#">Đặt sân</a></h5>
-                      <a href="img/portfolio/img1.png" class="fancybox"><i class="fa fa-plus fa-2x"></i></a>
+                      <h5><a >Đặt sân</a></h5>
+                      <a style="touch-action: none;"  onclick="choosesan(event,<?php echo  $value->idsan ;?>)"><i class="fa fa-plus fa-2x"></i></a>
                     </div>
                   </div>
                 </div>
-                <p class="text-center" style="color: black;font-size: 18px;margin-top: 10px;">Sân A-1</p>
+                <p class="text-center" style="color: black;font-size: 18px;margin-top: 10px;">Sân <?php echo  $value->tensan ;?></p>
+                <b><p class="text-center text-primary price-pitch">Giá:<span style="padding-left: 10px;padding-right: 5px;"><?php echo  $value->dongia ;?></span>đ</p></b>
               </article>
-
-              <article class="col-md-3 isotopeItem photography">
-                <div class="portfolio-item">
-                  <img src="img/portfolio/img1.png" alt="">
-                  <div class="portfolio-desc align-center">
-                    <div class="folio-info">
-                      <h5><a href="#">Đặt sân</a></h5>
-                      <a href="img/portfolio/img1.png" class="fancybox"><i class="fa fa-plus fa-2x"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <p class="text-center" style="color: black;font-size: 18px;margin-top: 10px;">Sân A-1</p>
-              </article>
-
-
-              <article class="col-md-3 isotopeItem photography">
-                <div class="portfolio-item">
-                  <img src="img/portfolio/img1.png" alt="">
-                  <div class="portfolio-desc align-center">
-                    <div class="folio-info">
-                      <h5><a href="#">Đặt sân</a></h5>
-                      <a href="img/portfolio/img1.png" class="fancybox"><i class="fa fa-plus fa-2x"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <p class="text-center" style="color: black;font-size: 18px;margin-top: 10px;">Sân A-1</p>
-              </article>
-
-              <article class="col-md-3 isotopeItem print">
-                <div class="portfolio-item">
-                  <img src="img/portfolio/img1.png" alt="">
-                  <div class="portfolio-desc align-center">
-                    <div class="folio-info">
-                      <h5><a href="#">Đặt sân</a></h5>
-                      <a href="img/portfolio/img1.png" class="fancybox"><i class="fa fa-plus fa-2x"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <p class="text-center" style="color: black;font-size: 18px;margin-top: 10px;">Sân A-1</p>
-              </article>
-
-              <article class="col-md-3 isotopeItem photography">
-                <div class="portfolio-item">
-                  <img src="img/portfolio/img1.png" alt="">
-                  <div class="portfolio-desc align-center">
-                    <div class="folio-info">
-                      <h5><a href="#">Đặt sân</a></h5>
-                      <a href="img/portfolio/img1.png" class="fancybox"><i class="fa fa-plus fa-2x"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <p class="text-center" style="color: black;font-size: 18px;margin-top: 10px;">Sân A-1</p>
-              </article>
-
-              <article class="col-md-3 isotopeItem webdesign">
-                <div class="portfolio-item">
-                  <img src="img/portfolio/img1.png" alt="">
-                  <div class="portfolio-desc align-center">
-                    <div class="folio-info">
-                      <h5><a href="#">Đặt sân</a></h5>
-                      <a href="img/portfolio/img1.png" class="fancybox"><i class="fa fa-plus fa-2x"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <p class="text-center" style="color: black;font-size: 18px;margin-top: 10px;">Sân A-1</p>
-              </article>
-
-              <article class="col-md-3 isotopeItem print">
-                <div class="portfolio-item">
-                  <img src="img/portfolio/img1.png" alt="">
-                  <div class="portfolio-desc align-center">
-                    <div class="folio-info">
-                      <h5><a href="#">Đặt sân</a></h5>
-                      <a href="img/portfolio/img1.png" class="fancybox"><i class="fa fa-plus fa-2x"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <p class="text-center" style="color: black;font-size: 18px;margin-top: 10px;">Sân A-1</p>
-              </article>
-
-              <article class="col-md-3 isotopeItem photography">
-                <div class="portfolio-item">
-                  <img src="img/portfolio/img1.png" alt="">
-                  <div class="portfolio-desc align-center">
-                    <div class="folio-info">
-                      <h5><a href="#">Đặt sân</a></h5>
-                      <a href="img/portfolio/img1.png" class="fancybox"><i class="fa fa-plus fa-2x"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <p class="text-center" style="color: black;font-size: 18px;margin-top: 10px;">Sân A-1</p>
-              </article>
-
-              <article class="col-md-3 isotopeItem print">
-                <div class="portfolio-item">
-                  <img src="img/portfolio/img1.png" alt="">
-                  <div class="portfolio-desc align-center">
-                    <div class="folio-info">
-                      <h5><a href="#">Đặt sân</a></h5>
-                      <a href="img/portfolio/img1.png" class="fancybox"><i class="fa fa-plus fa-2x"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <p class="text-center" style="color: black;font-size: 18px;margin-top: 10px;">Sân A-1</p>
-            </div>
+              <?php }?>
+              </div>
           </div>
         </div>
       </div>
 
     </div>
   </section>
-
-  <section id="footer" class="section footer">
+  
+  <section id="clients" class="section clearfix bg-white">
     <div class="container">
-      <div class="row animated opacity mar-bot20" data-andown="fadeIn" data-animation="animation">
-        <div class="col-sm-12 align-center">
-          <ul class="social-network social-circle">
-            <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
-            <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
-            <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-          </ul>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-sm-2 align-center">
+              <img alt="logo" src="/datsannhanh/image/clients/logo1.png">
+            </div>
+
+            <div class="col-sm-2 align-center">
+              <img alt="logo" src="/datsannhanh/image/clients/logo2.png">
+            </div>
+
+            <div class="col-sm-2 align-center">
+              <img alt="logo" src="/datsannhanh/image/clients/logo3.png">
+            </div>
+
+            <div class="col-sm-2 align-center">
+              <img alt="logo" src="/datsannhanh/image/clients/logo4.png">
+            </div>
+
+            <div class="col-sm-2 align-center">
+              <img alt="logo" src="/datsannhanh/image/clients/logo5.png">
+            </div>
+            <div class="col-sm-2 align-center">
+              <img alt="logo" src="/datsannhanh/image/clients/logo6.png">
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="row align-center mar-bot20">
-        <ul class="footer-menu">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Privacy policy</a></li>
-          <li><a href="#">Get in touch</a></li>
-        </ul>
-      </div>
-      <div class="row align-center copyright">
-        <div class="col-sm-12">
-          <p>Copyright &copy; 2019</p>
-        </div>
-      </div>
-      <div class="credits">
-        <!--
-          All the links in the footer should remain intact.
-          You can delete the links only if you purchased the pro version.
-          Licensing information: https://bootstrapmade.com/license/
-          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Vlava
-        -->
-        Designed by Hoang Thi Bich
       </div>
     </div>
-
   </section>
-  <a href="#header" class="scrollup"><i class="fa fa-chevron-up"></i></a>
 
-  <!-- Javascript Library Files -->
-  <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-  <script src="js/jquery.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.isotope.min.js"></script>
-  <script src="js/jquery.nicescroll.min.js"></script>
-  <script src="js/fancybox/jquery.fancybox.pack.js"></script>
-  <script src="js/skrollr.min.js"></script>
-  <script src="js/jquery.scrollTo.min.js"></script>
-  <script src="js/jquery.localScroll.min.js"></script>
-  <script src="js/stellar.js"></script>
-  <script src="js/jquery.appear.js"></script>
-  <script src="js/jquery.flexslider-min.js"></script>
 
-  <!-- Contact Form JavaScript File -->
-  <script src="contactform/contactform.js"></script>
 
-  <!-- Template Main Javascript File -->
-  <script src="js/main.js"></script>
 
+  
+  <!-- Modal login -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="background-color: slategrey;">
+      <div class="modal-header" style="text-align: center;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="modal-title" style="font-size: -webkit-xxx-large;font-family: sans-serif;">Đăng nhập</h3>
+      </div>
+      <form action="<?php echo base_url();?>login_controller/index" method="POST">
+      <div class="modal-body" style="text-align: center;margin-bottom:20px">
+        <img src="/datsannhanh/image/ninja-simple-login.png" alt="login" style="width: 40%;">
+        <div class="form-inline">
+          <i class="fa fa-user icon" ></i>
+          <input type="text" name="username" class="form-control">
+        </div>
+        <div class="form-inline" style="margin-top: 10px;">
+          <i class="fa fa-lock icon" ></i>
+          <input type="password" name="password" class="form-control" style="margin-left: 4px;">
+        </div>
+      
+      </div>
+      <div class="modal-footer" style="text-align: center;"">
+        <button type="button" class="btn btn-danger button" data-dismiss="modal">Hủy </button>
+        <button type="submit" class="btn btn-primary button" style="border-radius: 7%;">Đăng nhập</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+ <!-- Modal login -->
+
+
+ <div class="modal fade" id="bookPicthModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="width: 70%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Đặt sân</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="pitch-name" class="col-form-label">Tên sân:</label>
+            <input type="text" class="form-control" id="pitch-name" disabled="true">
+            <input type="hidden" name="pitchid" id="pitchid">
+          </div>
+          <div class="form-group">
+            <table class="table">
+              <tr>
+                <td style="width: 50%">
+                  <p class="text-center">Danh mục dịch vụ</p>
+                  <div>
+                      <table class="table">
+                      <thead>
+                        <tr>
+                          <th width="10%" style="vertical-align: middle;">STT</th>
+                          <th width="35%" style="vertical-align: middle;">Tên dịch vụ</th>
+                          <th width="30%" style="vertical-align: middle;">Đơn giá</th>
+                          <th width="20%" style="vertical-align: middle;">Số lượng</th>
+                          <th width="5%" style="vertical-align: middle;">Chọn</th>
+                        </tr>
+                        </thead>
+                        <tbody id="danhmucdichvu">
+                        <?php 
+                          $i=1;
+                          foreach ($dichvu as $key => $value) {
+                         ?>
+                        <tr id="dichvu-<?php echo $i;?>">
+                          <td class="text-center"><?php echo $i ;?></td>
+                          <td class="text-center"><?php echo $value->tendichvu;?></td>
+                          <td class="text-center"><?php echo $value->dongia?></td>
+                          <td class="text-center">
+                            <div class="form-group">
+                              <select class="soluongchon-<?php echo $i;?>">
+                                <?php for ($j=1; $j <= 20; $j++) { 
+                                 ?>
+                                  <option value="<?php echo $j;?>"><?php echo $j;?></option>
+                                <?php };?>
+                              </select>
+                            </div>
+                          </td>
+                          <td class="text-center"><input type="checkbox" name="dichvuchon" onchange="chooseService(<?php echo $i;?>)" data-id="<?php echo $value->iddichvu;?>" data-name="<?php echo $value->tendichvu;?>" data-index = "<?php echo $i;?>" data-price="<?php echo $value->dongia;?>" class="dichvuchon-<?php echo $i;?>"></td>
+                        </tr>
+                        <?php 
+                          $i++;}
+                        ?>
+                        </tbody>
+                      </table>
+                  </div>
+                </td>
+                <td style="width: 50%">
+                  <p class="text-center">Dịch vụ đã chọn</p>
+                  <div >
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th width="10%" class="text-center">STT</th>
+                      <th width="45%" class="text-center">Tên dịch vụ</th>
+                      <th width="30%" class="text-center">Số lượng</th>
+                      <th width="15%" class="text-center">Xóa</th>
+                    </tr>
+                    <tbody id="dichvudachon">
+
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="form-group">
+            <label for="dp3" class="col-form-label">Ngày đặt sân:</label>
+            <input type="text" class="form-control" id="dp3"/>
+          </div>
+          <div class="form-group">
+            <div class="form-inline">
+              <div class="form-group" style="width: 50%;float: left;">
+                <label for="timestart" class="col-form-label">Thời gian bắt đầu:</label>
+                <input type="text" class="form-control" id="timestart" />
+              </div>
+              <div class="form-group" style="width: 50%;float: left;">
+                <label for="timeend" class="col-form-label">Thời gian kết thúc:</label>
+                <input type="text" class="form-control" id="timeend" />
+              </div>
+            </div>
+          </div>
+           <div class="form-group">
+            <label for="pitch-type" class="col-form-label">Loại sân:</label>
+            <input type="text" class="form-control" id="pitch-type" disabled="true" />
+          </div>
+          <div class="form-group">
+            
+            <label for="pitch-price" class="col-form-label">Giá sân:</label>
+            <input type="text" class="form-control" id="pitch-price" disabled="true" />
+         
+          </div>
+         
+          <div class="form-group">
+            <label for="total-price" class="col-form-label">Tổng tiền cần thanh toán:</label>
+            <input type="text" class="form-control" id="total-price" disabled="true" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="btndatsan" class="btn btn-primary">Đặt sân</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<?php
+  include("common/footer.php")
+?>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="/datsannhanh/js/mdtimepicker.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script type="text/javascript">
+  jQuery(window).load(function() {
+
+    $("#dp3").datepicker();
+    $("#dp3").datepicker("option", "dateFormat", "yy-mm-dd");
+    $("#sidebar").mCustomScrollbar({
+         theme: "minimal"
+    });
+
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+    // $(window).resize(function(){
+    //   var width = $(window).width();
+    //   //console.log(width);
+    //   if (width > 768){
+    //       $('#sidebar').toggleClass('active');
+    //   }
+    // });
+    $('#timestart').mdtimepicker({format: 'hh:mm'});
+    $('#timeend').mdtimepicker({format: 'hh:mm'});
+    $("#bookPicthModal").on('hide.bs.modal', function(){
+      // var c = confirm('Bạn có muốn xóa tất cả dữ liệu vừa nhập không?');
+      // if(c == false){
+      // return;
+      // }
+      $('#timestart').val('');
+      $('#timeend').val('');
+      dichvudachon.splice(0,dichvudachon.length);
+      $('#danhmucdichvu input[type=checkbox]').each(function(){
+        $(this).prop('checked',false);
+    });
+    loaddichvu();
+    $('#total-price').val('');
+  });
+    $('#btndatsan').on('click',function(){
+      var timestart = $('#timestart').val();
+      var timeend = $('#timeend').val();
+      var tongthanhtoan = $('#total-price').val();
+      var ngaydatsan = $("#dp3").val();
+      var idsan = $('#pitchid').val();
+      if (ngaydatsan.length == 0) {
+        toastr.warning("Vui lòng chọn ngày đặt sân trước khi thực hiện đặt sân!");
+        return;
+      }
+      if (timestart.length == 0 || timeend.length == 0) {
+        toastr.warning("Vui lòng chọn thời gian bắt đầu và kết thúc trước khi thực hiện đặt sân!");
+        return;
+      }
+      if (parseInt(timeend.substring(3,5)) != 30 && parseInt(timeend.substring(3,5)) != 0 || parseInt(timestart.substring(3,5))!= 30 && parseInt(timestart.substring(3,5))!= 0) {
+        toastr.warning("Vui lòng chọn thời gian là bội của 30 phút!");
+        return;
+      }
+      if(parseInt(timeend.substring(0,2)) <  parseInt(timestart.substring(0,2)) || parseInt(timeend.substring(0,2)) ==  parseInt(timestart.substring(0,2)) && parseInt(timeend.substring(3,5)) <  parseInt(timestart.substring(3,5))){
+        toastr.warning('Vui lòng nhập thời gian kết thúc lớn hơn thời gian bắt đầu!');
+        return;
+      }
+      var datainput = { 
+                        idsan:idsan,
+                        timestart:timestart,
+                        timeend: timeend,
+                        ngaydatsan: ngaydatsan,
+                        tongthanhtoan:tongthanhtoan,
+                        dichvulist:dichvudachon
+                      };
+      $.ajax({
+        type: "POST",
+        url: "<?php echo base_url(); ?>" + "index.php/homepage_controller/datsan",
+        dataType: 'json',
+        data: datainput,
+        success: function(res) {
+          if (res.result > 0)
+          {
+            toastr.success('Đặt sân thành công!');
+            $('#bookPicthModal').modal('hide');
+          }
+          else
+          {
+            toastr.error(res.error);
+          }
+        },
+        error:function(e){
+          toastr.error('Đặt sân thất bại!');
+        }
+      });
+    });
+});
+
+  function choosesan(event,id){
+    event.preventDefault();
+    //var keywords = $("#ipkeyword").val();
+     var username = '<?php echo $this->session->userdata('username');?>';
+     if(username ==''){
+      alert('Bạn phải đăng nhập mới có thể đặt sân!');
+      $('#loginModal').modal('show');
+      return false;
+     }
+     else{
+      $('#bookPicthModal').modal('show');
+     }
+    
+    $.ajax({
+    type: "POST",
+    url: "<?php echo base_url(); ?>" + "index.php/homepage_controller/getSanById",
+    dataType: 'json',
+    data: {id: id},
+    success: function(res) {
+    if (res!="")
+    {
+      $('#pitch-name').val(res.tensan);
+      $('#pitch-price').val(res.dongia);
+      $('#pitch-type').val(res.loaisan);
+      $('#pitchid').val(res.idsan);
+    }
+    }
+    });
+  }
+  var dichvudachon=[];
+  function chooseService(id){
+    var soluong = $(".soluongchon-"+id).val();
+    var iddichvu = $('.dichvuchon-'+id).attr('data-id');
+    var tendichvu = $('.dichvuchon-'+id).attr('data-name');
+    var dongia = $('.dichvuchon-'+id).attr('data-price');
+    if($('.dichvuchon-'+id).prop('checked')==true){
+      var dichvu = {
+        iddichvu : iddichvu,
+        tendichvu: tendichvu,
+        dongia : dongia,
+        soluong: soluong,
+        thanhtien: parseInt(dongia) * parseInt(soluong)
+      };
+      dichvudachon.push(dichvu);
+      caculator();
+      loaddichvu();
+    }else{
+      for (var i = 0; i < dichvudachon.length; i++) {
+        if(dichvudachon[i].iddichvu == $('.dichvuchon-'+id).attr('data-id')){
+          dichvudachon.splice(i,1);
+        }
+      }
+      caculator();
+      loaddichvu();
+    }
+    
+  }
+  function deletesv(id){
+    for (var i = 0; i < dichvudachon.length; i++) {
+        if(dichvudachon[i].iddichvu == id){
+          $('#danhmucdichvu input[type=checkbox]').each(function(){
+            if($(this).attr('data-id') == id){
+              $(this).prop('checked',false);
+            }
+          });
+          dichvudachon.splice(i,1);
+
+        }
+      }
+      caculator();
+      loaddichvu();
+  }
+  $('#timestart').on('change',function(){
+    var timestart = $('#timestart').val();
+    var timeend = $('#timeend').val();
+    if(parseInt(timeend.substring(0,2)) <  parseInt(timestart.substring(0,2)) || parseInt(timeend.substring(0,2)) ==  parseInt(timestart.substring(0,2)) && parseInt(timeend.substring(3,5)) <  parseInt(timestart.substring(3,5))){
+    toastr.warning('Vui lòng nhập thời gian kết thúc lớn hơn thời gian bắt đầu!');
+    return;
+      }
+    if (parseInt(timestart.substring(3,5)) != 30 && parseInt(timestart.substring(3,5)) != 0 ) {
+      toastr.warning("Vui lòng chọn thời gian là bội của 30 phút!");
+      return;
+    }
+    caculator();
+  });
+  $('#timeend').on('change',function(){
+     var timestart = $('#timestart').val();
+    var timeend = $('#timeend').val();
+    if(parseInt(timeend.substring(0,2)) <  parseInt(timestart.substring(0,2)) || parseInt(timeend.substring(0,2)) ==  parseInt(timestart.substring(0,2)) && parseInt(timeend.substring(3,5)) <  parseInt(timestart.substring(3,5))){
+    toastr.warning('Vui lòng nhập thời gian kết thúc lớn hơn thời gian bắt đầu!');
+    return;
+      }
+    if(parseInt(timeend.substring(0,2)) ==  parseInt(timestart.substring(0,2))){
+      if( parseInt(timeend.substring(3,5)) <=  parseInt(timestart.substring(3,5))){
+        toastr.warning('Vui lòng nhập thời gian kết thúc lớn hơn thời gian bắt đầu!');
+        return;
+      }
+    
+    }
+    if (parseInt(timeend.substring(3,5)) != 30 && parseInt(timeend.substring(3,5)) != 0 ) {
+      toastr.warning("Vui lòng chọn thời gian là bội của 30 phút!");
+      return;
+    }
+    caculator();
+  });
+function caculator(){
+  var timestart = $('#timestart').val();
+  var timeend = $('#timeend').val();
+  var sum = 0;
+ 
+  for (var i = 0; i < dichvudachon.length; i++) {
+    sum += parseInt(dichvudachon[i].dongia) * parseInt(dichvudachon[i].soluong);
+  }
+  if (timeend != '' && timestart != '' ){
+    var sumtime = (parseInt(timeend.substring(0,2)) * 60 + parseInt(timeend.substring(3,5))) - (parseInt(timestart.substring(0,2)) * 60 + parseInt(timestart.substring(3,5)));
+    sum += parseInt($('#pitch-price').val()) * (sumtime/60);
+  }else{
+    sum += parseInt($('#pitch-price').val());
+  }
+  $('#total-price').val(Math.round(sum));
+  //return sum;
+}
+function loaddichvu(){
+  $('#dichvudachon').empty();
+  for (var i = 0; i < dichvudachon.length; i++) {
+    var html = '<tr>'
+                +'<td class="text-center">'+ (i+1) +'</td>'
+                +'<td class="text-center">'+dichvudachon[i].tendichvu+'</td>'
+                +'<td class="text-center">'+dichvudachon[i].soluong+'</td>'
+                +'<td class="text-center"><input type="checkbox" class="delete-dichvu" onclick="deletesv('+dichvudachon[i].iddichvu+')"></td></tr>';
+    $('#dichvudachon').append(html);
+  }
+
+}
+
+</script>
 </body>
 
 </html>

@@ -13,6 +13,28 @@ class model_hoadon extends CI_Model {
         $query = $this->db->get('tbl_hoadon');
         return $query->result();
       }
+      public function getBillByCustomer($id){
+        $query = 'select 
+                  idhoadon,
+                  tensan,
+                  c.id,
+                  tenkhachhang,
+                  timeStart,
+                  timeEnd,
+                  tongthanhtoan,
+                  ngaydat,
+                  b.status
+              from
+                  tbl_hoadon b
+                      inner join
+                  tbl_san s ON s.idsan = b.idsan
+                      inner join
+                  tbl_customer c ON iduser = c.id 
+              where c.id='.$id.' order by ngaydat desc';
+          $result = $this->db->query($query);
+        return $result->result();
+      }
+
       public function getBillToBillManager(){
         $query = 'select 
                   idhoadon,

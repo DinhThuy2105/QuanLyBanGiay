@@ -54,6 +54,7 @@
   <script src="/datsannhanh/js/stellar.js"></script>
   <script src="/datsannhanh/js/jquery.appear.js"></script>
   <script src="/datsannhanh/js/jquery.flexslider-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
   <!-- Contact Form JavaScript File -->
   <script src="contactform/contactform.js"></script>

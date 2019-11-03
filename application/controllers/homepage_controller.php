@@ -74,6 +74,18 @@ class homepage_controller extends CI_Controller {
 		}
 		$this->load->view('works',$result);
 	}
+
+	public function view_bill(){
+		$id=$this->session->userdata('id');
+		$result['data'] = $this->model_hoadon->getBillByCustomer($id);
+		$result['error'] = '';
+		if(count($result['data'])==0){
+		  $result['error'] = 'Hiện tại chưa có hóa đơn nào được đặt!';
+		  //$this->load->view('quan-ly-bill',$result);
+		}
+		$this->load->view('view_bill',$result);
+	  }
+	
 	public function getSanById(){
 		$id = $this->input->post('id');
 		$data['san'] = $this->model_san->getSanById($id);

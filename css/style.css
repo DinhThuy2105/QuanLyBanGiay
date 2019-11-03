@@ -1103,6 +1103,8 @@ Media queries
   }
   .dropdown-item-menu{
 	font-size: 14px;
+	padding: 10px 0px 10px 10px;
+	margin: 0px;
   }
   .dropdown-item-menu:hover{
 	font-size: 14px;
@@ -1120,3 +1122,15 @@ Media queries
 	font-size: 18px;
 	
   }
+
+.text-dark span{
+	float: left;
+}
+
+.text-dark {
+	width: 450px;
+}
+
+.text-dark input[type=text],input[type=password]{
+	float: right;
+}

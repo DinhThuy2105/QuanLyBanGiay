@@ -25,5 +25,11 @@ class model_san extends CI_Model {
         $query = $this->db->get('tbl_san');
         return $query->result();
       }
+
+      public function insertPitch($db){
+        $this->db->insert('tbl_san',$db);
+        //print_r($this->db->last_query());
+        return $this->db->insert_id();
+      } 
   	}
 ?>
